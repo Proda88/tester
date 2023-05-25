@@ -1,0 +1,154 @@
+To complete project, following site should be used:
+• For UI: https://www.saucedemo.com/
+• For API: https://jsonplaceholder.typicode.com/
+
+Part 1 – Selenium:
+• Using xUnit as test runner and Selenium, create a new project called SauceDemo.Test
+• Create directory – POM
+• Write test for Successful user login and test for failed login. For failed login execute test with at
+least 3 different invalid username/password combinations.
+• Once user is successfully logged in, add following 3 products to the basket: Backpack,
+BikeLight and TShit. Check if the right number of items has been added to the basket.
+• Navigate to the basket and remove all 3 items that have been previously added. Check if
+basket is empty and go back to shopping after that.
+
+Part 2 – REST APIs:
+• Using xUnit as runner and RestSharp as library create a new project
+• Write statusCode tests for following endpoints:
+• GET: https://jsonplaceholder.typicode.com/posts
+• GET: https://jsonplaceholder.typicode.com/comments
+• GET: https://jsonplaceholder.typicode.com/photos
+• GET: https://jsonplaceholder.typicode.com/comments?postId=1
+• For all 4 end points, check if content returned is not empty
+• Deserialize json body for last endpoint (postId=1) and check number of comments returned for
+this postId
+
+Part 3 – Test cases:
+• For each test that you automate, create appropriate test case (in any test management tool
+such as TestRail or even in Word or Notepad)
+
+Test cases:
+
+Part1_Selenium Test cases:
+
+Test case 1 (Verify if user can properly log in with correct username and password before
+clicking the Login button):
+Precondition:
+1. The user successfully accessed the website “https://www.saucedemo.com”
+Test steps:
+1. I enter “standard_user” in the Username field
+2. Enter “secret_sauce” in the Password field
+3. Click the “Login” button
+Expected result:
+1. I have successfully logged in, the home page is open
+
+Test case 2 (Verify that the appropriate message appears in case of entering an correct
+username and incorrect password before clicking the Login button):
+Precondition:
+1. The user successfully accessed the website “https://www.saucedemo.com”
+Test steps:
+1. I enter “standard_user” in the Username field
+2. Enter “pass1” in the Password field
+3. Click the “Login” button
+Expected result:
+1. The message "Epic sadface: Username and password do not match any user in this
+service" appeared
+
+Test case 3 (Verify that the appropriate message appears in case of entering an incorrect
+username and correct password before clicking the Login button):
+Precondition:
+1. The user successfully accessed the website “https://www.saucedemo.com”
+Test steps:
+1. I enter “standarduser” in the Username field
+2. Enter “secret_sauce” in the Password field
+3. Click the “Login” button
+Expected result:
+1. The message "Epic sadface: Username and password do not match any user in this
+service" appeared
+
+Test case 4 (Verify whether the appropriate message appears after clicking the Login
+button without first entering a username and password):
+Precondition:
+1. The user successfully accessed the website “https://www.saucedemo.com”
+Test steps:
+1. Left a null value in the Username field
+2. Left a null value in the Password field
+3. Click the “Login” button
+Expected result:
+1. The message "Epic sadface: Username is required" appeared
+
+Test case 5 (Verify that by clicking the “Add to cart” button for 3 products, you successfully
+added 3 products to the cart):
+Precondition:
+1. Test case 1 successfully executed
+Test steps:
+1. Click the “Add to cart” button below the product "Sauce Labs Backpack"
+2. Click the “Add to cart” button below the product "Sauce Labs Bike Light"
+3. Click the “Add to cart” button below the product "Sauce Labs Bolt T-Shirt"
+Expected result:
+1. The right number of items has been added to the cart
+
+Test case 6 (Verify that by clicking the “Remove” button for 3 products in card, you
+successfully removed 3 products from the cart):
+Precondition:
+1. Test case 5 successfully executed
+Test steps:
+1. Click the “Cart” button
+2. Click the “Remove” button next to the product "Sauce Labs Backpack"
+3. Click the “Remove” button next to the product "Sauce Labs Bike Light"
+4. Click the “Remove” button next to the product "Sauce Labs Bolt T-Shirt"
+5. Click the “Continue Shopping” button
+Expected result:
+1. The right number of items has been removed from the cart
+
+Part2_RestSharp_APITest Test cases:
+
+Test case 1 (Verify status code for GET request to the RESTful API endpoint
+“https://jsonplaceholder.typicode.com” with parameter “posts”)
+1. Send a GET request to the endpoint “https://jsonplaceholder.typicode.com/posts”
+2. Received status code 200 (OK)
+
+Test Case 2 (Verify status code for GET request to the RESTful API endpoint
+'https://jsonplaceholder.typicode.com' with parameter “comments”)
+1. Send a GET request to the endpoint “https://jsonplaceholder.typicode.com/comments”
+2. Received status code 200 (OK)
+
+Test Case 3 (Verify status code for GET request to the RESTful API endpoint
+'https://jsonplaceholder.typicode.com' with parameter “photos”)
+1. Send a GET request to the endpoint “https://jsonplaceholder.typicode.com/photos”
+2. Received status code 200 (OK)
+
+Test Case 4 (Verify status code for GET request to the RESTful API endpoint
+'https://jsonplaceholder.typicode.com' with parameter “postId=1”)
+1. Send a GET request to the endpoint
+“https://jsonplaceholder.typicode.com/comments?postId=1”
+2. Received status code 200 (OK)
+
+Test Case 5 (Verify non-empty content for GET request to the RESTful API endpoint
+“https://jsonplaceholder.typicode.com” with parameter “posts”)
+1. Send a GET request to the endpoint “https://jsonplaceholder.typicode.com/posts”
+2. Returned content is not empty
+
+Test Case 6 (Verify non-empty content for GET request to the RESTful API endpoint
+“https://jsonplaceholder.typicode.com” with parameter “comments”)
+1. Send a GET request to the endpoint “https://jsonplaceholder.typicode.com/comments”
+2. Returned content is not empty
+
+Test Case 7 (Verify non-empty content for GET request to the RESTful API endpoint
+“https://jsonplaceholder.typicode.com” with parameter “posts”)
+1. Send a GET request to the endpoint “https://jsonplaceholder.typicode.com/photos”
+2. Returned content is not empty
+
+Test Case 8 (Verify non-empty content for GET request to the RESTful API endpoint
+“https://jsonplaceholder.typicode.com” with parameter “postId=1”)
+1. Send a GET request to the endpoint
+“https://jsonplaceholder.typicode.com/comments?postId=1”
+2. Returned content is not empty
+
+Test Case 9 (Verify number of comments for
+"https://jsonplaceholder.typicode.com/comments?postId=1")
+1. Send a GET request to the endpoint
+“https://jsonplaceholder.typicode.com/comments?postId=1”
+2. Deserialize the JSON response body
+3. Retrieve the number of comments returned for the postId
+4. Number of comments is “5” as expected
